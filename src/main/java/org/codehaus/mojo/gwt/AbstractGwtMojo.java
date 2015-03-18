@@ -69,9 +69,9 @@ import java.util.Set;
 public abstract class AbstractGwtMojo
     extends AbstractMojo
 {
-    private static final String GWT_USER = "com.google.gwt:gwt-user";
+    private static final String GWT_USER = ":gwt-user";
 
-    private static final String GWT_DEV = "com.google.gwt:gwt-dev";
+    private static final String GWT_DEV = ":gwt-dev";
 
     /** GWT artifacts groupId */
     public static final String GWT_GROUP_ID = "com.google.gwt";
@@ -152,6 +152,13 @@ public abstract class AbstractGwtMojo
      */
     @Parameter(property = "gwt.extraSource")
     private List<File> extraSources;
+    
+    /**
+     * For users who maintain forked copies of Gwt, allow swapping out the
+     * standard com.google.gwt groupId for a custom value.
+     */
+    @Parameter(property = "gwt.groupId", defaultValue="com.google.gwt")
+    private String groupId;
 
     /**
      * The forked command line will use gwt sdk jars first in classpath.
@@ -255,12 +262,12 @@ public abstract class AbstractGwtMojo
 
     protected Collection<File> getGwtDevJar() throws MojoExecutionException
     {
-        return getJarFiles( GWT_DEV );
+        return getJarFiles( groupId + GWT_DEV );
     }
 
     protected Collection<File> getGwtUserJar() throws MojoExecutionException
     {
-        return getJarFiles( GWT_USER );
+        return getJarFiles( groupId + GWT_USER );
     }
 
     private Collection<File> getJarFiles(String artifactId) throws MojoExecutionException
@@ -322,7 +329,7 @@ public abstract class AbstractGwtMojo
             IOUtils.closeQuietly( inputStream );
         }
 
-        Artifact gwtUser = project.getArtifactMap().get( GWT_USER );
+        Artifact gwtUser = project.getArtifactMap().get( groupId + GWT_USER );
         if (gwtUser != null)
         {
             String mojoGwtVersion = properties.getProperty( "gwt.version" );
