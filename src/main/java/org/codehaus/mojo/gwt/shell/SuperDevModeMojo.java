@@ -150,6 +150,8 @@ public class SuperDevModeMojo extends AbstractGwtShellMojo
             cmd.addToClasspath( getGwtUserJar() )
                 .addToClasspath( getGwtDevJar() );
         }
+        
+        addExtraSources();
 
         cmd.addToClasspath( getClasspath( Artifact.SCOPE_COMPILE ) );
         addCompileSourceArtifacts( cmd );

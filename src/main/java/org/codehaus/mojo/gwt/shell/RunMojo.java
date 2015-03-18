@@ -323,6 +323,8 @@ public class RunMojo
             cmd.addToClasspath( getGwtUserJar() )
                 .addToClasspath( getGwtDevJar() );
         }
+        
+        addExtraSources();
 
         cmd.addToClasspath( getClasspath( Artifact.SCOPE_RUNTIME ) );
         addCompileSourceArtifacts( cmd );

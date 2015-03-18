@@ -145,6 +145,13 @@ public abstract class AbstractGwtMojo
      */
     @Parameter(defaultValue = "false", property = "gwt.inplace")
     private boolean inplace;
+    
+    /**
+     * Locations on the filesystem of additional source code to be included for
+     * Gwt compilation
+     */
+    @Parameter(property = "gwt.extraSource")
+    private List<File> extraSources;
 
     /**
      * The forked command line will use gwt sdk jars first in classpath.
@@ -359,6 +366,11 @@ public abstract class AbstractGwtMojo
         getProject().addCompileSourceRoot( path.getAbsolutePath() );
     }
 
+    protected void addExtraSources() {
+      for (File extraSource : extraSources) {
+        addCompileSourceRoot(extraSource);
+      }
+    }
     /**
      * @return the project
      */

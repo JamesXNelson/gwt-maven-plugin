@@ -402,6 +402,7 @@ public class CompileMojo
             cmd.addToClasspath( getGwtUserJar() )
                .addToClasspath( getGwtDevJar() );
         }
+        addExtraSources();
         cmd.addToClasspath( getClasspath( Artifact.SCOPE_COMPILE ) );
         if ( !gwtSdkFirstInClasspath )
         {
