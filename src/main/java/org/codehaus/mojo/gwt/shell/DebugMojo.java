@@ -58,7 +58,6 @@ public class DebugMojo
      * Override extraJVMArgs to append JVM debugger option
      * <p>
      * {@inheritDoc}
-     * 
      * @see org.codehaus.mojo.gwt.shell.AbstractGwtShellMojo#getExtraJvmArgs()
      */
     @Override
@@ -73,6 +72,7 @@ public class DebugMojo
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public void doExecute()
         throws MojoExecutionException, MojoFailureException

@@ -53,7 +53,7 @@ import com.thoughtworks.qdox.model.Type;
 
 /**
  * Goal which generate Async interface.
- * 
+ *
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
  * @version $Id$
  */
@@ -115,12 +115,18 @@ public class GenerateAsyncMojo
     @Component
     private BuildContext buildContext;
 
+    /** {@inheritDoc} */
     @Override
     protected boolean isGenerator()
     {
         return true;
     }
 
+    /**
+     * <p>execute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     */
     public void execute()
         throws MojoExecutionException
     {

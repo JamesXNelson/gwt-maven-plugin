@@ -20,7 +20,10 @@ package org.codehaus.mojo.gwt.webxml;
  */
 
 /**
+ * <p>ServletDescriptor class.</p>
+ *
  * @version $Id$
+ * @author james
  */
 public class ServletDescriptor
 {
@@ -31,37 +34,73 @@ public class ServletDescriptor
 
     private String name;
 
+    /**
+     * <p>Constructor for ServletDescriptor.</p>
+     *
+     * @param path a {@link java.lang.String} object.
+     * @param className a {@link java.lang.String} object.
+     */
     public ServletDescriptor( String path, String className )
     {
         this.path = path;
         this.className = className;
     }
 
+    /**
+     * <p>Getter for the field <code>className</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getClassName()
     {
         return className;
     }
 
+    /**
+     * <p>Setter for the field <code>className</code>.</p>
+     *
+     * @param className a {@link java.lang.String} object.
+     */
     public void setClassName( String className )
     {
         this.className = className;
     }
 
+    /**
+     * <p>Getter for the field <code>path</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPath()
     {
         return path;
     }
 
+    /**
+     * <p>Setter for the field <code>path</code>.</p>
+     *
+     * @param path a {@link java.lang.String} object.
+     */
     public void setPath( String path )
     {
         this.path = path;
     }
 
+    /**
+     * <p>toString.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String toString()
     {
         return "Path:" + this.path + " Class:" + this.className;
     }
 
+    /**
+     * <p>Getter for the field <code>name</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName()
     {
         if ( name == null )
@@ -71,6 +110,11 @@ public class ServletDescriptor
         return name;
     }
 
+    /**
+     * <p>Setter for the field <code>name</code>.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     */
     public void setName( String name )
     {
         this.name = name;

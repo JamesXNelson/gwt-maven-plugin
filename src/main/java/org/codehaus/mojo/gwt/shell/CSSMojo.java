@@ -40,12 +40,13 @@ import java.nio.charset.Charset;
 
 /**
  * Creates CSS interfaces for css files.
- * Will use the utility tool provided in gwt sdk which create a corresponding Java interface for accessing 
+ * Will use the utility tool provided in gwt sdk which create a corresponding Java interface for accessing
  * the classnames used in the file.
  *
  * @author Stale Undheim <undheim@corporater.com>
  * @author olamy
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 @Mojo(name = "css", defaultPhase = LifecyclePhase.GENERATE_SOURCES, threadSafe = true)
 public class CSSMojo
@@ -69,11 +70,18 @@ public class CSSMojo
     @Component
     private BuildContext buildContext;
 
+    /** {@inheritDoc} */
     @Override
     protected boolean isGenerator() {
         return true;
     }
 
+    /**
+     * <p>doExecute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
+     */
     public void doExecute()
         throws MojoExecutionException, MojoFailureException
     {

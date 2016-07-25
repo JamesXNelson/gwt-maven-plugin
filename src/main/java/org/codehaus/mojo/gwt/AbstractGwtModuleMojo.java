@@ -69,6 +69,11 @@ public abstract class AbstractGwtModuleMojo
     @Parameter(property = "gwt.module")
     private String module;
 
+    /**
+     * <p>getGwtModules.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<String> getGwtModules()
     {
         String[] modules = getModules();
@@ -145,6 +150,7 @@ public abstract class AbstractGwtModuleMojo
         return modules;
     }
 
+    /** {@inheritDoc} */
     public GwtModule readModule( String name )
         throws GwtModuleReaderException
     {

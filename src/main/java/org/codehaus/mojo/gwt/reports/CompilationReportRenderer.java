@@ -31,10 +31,12 @@ import org.codehaus.mojo.gwt.GwtModule;
 import org.codehaus.plexus.i18n.I18N;
 
 /**
- * project compilation report renderer to display links to 
+ * project compilation report renderer to display links to
  * all modules report
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 public class CompilationReportRenderer
     extends AbstractMavenReportRenderer
@@ -53,6 +55,18 @@ public class CompilationReportRenderer
     
     private final Locale locale;
     
+    /**
+     * <p>Constructor for CompilationReportRenderer.</p>
+     *
+     * @param sink a {@link org.apache.maven.doxia.sink.Sink} object.
+     * @param gwtModules a {@link java.util.List} object.
+     * @param log a {@link org.apache.maven.plugin.logging.Log} object.
+     * @param reportsAvailable a boolean.
+     * @param compilerReportsPath a {@link java.lang.String} object.
+     * @param compilerReport a boolean.
+     * @param i18n a {@link org.codehaus.plexus.i18n.I18N} object.
+     * @param locale a {@link java.util.Locale} object.
+     */
     public CompilationReportRenderer( final Sink sink, final List<GwtModule> gwtModules, Log log,
                                       boolean reportsAvailable, String compilerReportsPath, boolean compilerReport,
                                       I18N i18n, Locale locale )
@@ -68,9 +82,7 @@ public class CompilationReportRenderer
         this.locale = locale;
     }
 
-    /**
-     * @see org.apache.maven.reporting.AbstractMavenReportRenderer#getTitle()
-     */
+    /** {@inheritDoc} */
     @Override
     public String getTitle()
     {
@@ -78,9 +90,7 @@ public class CompilationReportRenderer
         return "GWT Compilation Reports";
     }
 
-    /**
-     * @see org.apache.maven.reporting.AbstractMavenReportRenderer#renderBody()
-     */
+    /** {@inheritDoc} */
     @Override
     protected void renderBody()
     {
@@ -136,6 +146,13 @@ public class CompilationReportRenderer
         log.debug( "end renderBody" );
     }
     
+    /**
+     * <p>getI18nString.</p>
+     *
+     * @param locale a {@link java.util.Locale} object.
+     * @param key a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     protected String getI18nString( Locale locale, String key )
     {
         return i18n.getString( "compile-report", locale, key );

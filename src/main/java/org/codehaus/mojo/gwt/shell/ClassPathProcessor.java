@@ -23,10 +23,18 @@ import java.io.File;
 import java.util.List;
 
 /**
+ * <p>ClassPathProcessor interface.</p>
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 public interface ClassPathProcessor
 {
+    /**
+     * <p>postProcessClassPath.</p>
+     *
+     * @param files a {@link java.util.List} object.
+     */
     void postProcessClassPath(List<File> files);
 }

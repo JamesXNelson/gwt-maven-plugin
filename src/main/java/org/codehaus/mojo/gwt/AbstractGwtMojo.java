@@ -22,6 +22,20 @@ package org.codehaus.mojo.gwt;
 import static org.apache.maven.artifact.Artifact.SCOPE_COMPILE;
 import static org.apache.maven.artifact.Artifact.SCOPE_RUNTIME;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
@@ -44,20 +58,6 @@ import org.apache.maven.project.MavenProjectBuilder;
 import org.apache.maven.project.artifact.MavenMetadataSource;
 import org.codehaus.plexus.util.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-
 /**
  * Abstract Support class for all GWT-related operations.
  * <p>
@@ -74,7 +74,7 @@ public abstract class AbstractGwtMojo
     private static final String GWT_DEV = ":gwt-dev";
 
     /** GWT artifacts groupId */
-    public static final String GWT_GROUP_ID = "com.google.gwt";
+    public static final String GWT_GROUP_ID = "net.wetheinter";
 
     // --- Some Maven tools ----------------------------------------------------
 
@@ -145,19 +145,19 @@ public abstract class AbstractGwtMojo
      */
     @Parameter(defaultValue = "false", property = "gwt.inplace")
     private boolean inplace;
-    
+
     /**
      * Locations on the filesystem of additional source code to be included for
      * Gwt compilation
      */
     @Parameter(property = "gwt.extraSource")
     private List<File> extraSources;
-    
+
     /**
      * For users who maintain forked copies of Gwt, allow swapping out the
      * standard com.google.gwt groupId for a custom value.
      */
-    @Parameter(property = "gwt.groupId", defaultValue="com.google.gwt")
+    @Parameter(property = "gwt.groupId", defaultValue="net.wetheinter")
     private String groupId;
 
     /**
@@ -171,10 +171,15 @@ public abstract class AbstractGwtMojo
     @Parameter(defaultValue = "false", property = "gwt.gwtSdkFirstInClasspath")
     protected boolean gwtSdkFirstInClasspath;
 
+    /**
+     * <p>getOutputDirectory.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     public File getOutputDirectory()
     {
         File out = inplace ? warSourceDirectory : webappDirectory;
-        if ( !StringUtils.isBlank( modulePathPrefix ) ) 
+        if ( !StringUtils.isBlank( modulePathPrefix ) )
         {
             out = new File(out, modulePathPrefix);
         }
@@ -188,12 +193,12 @@ public abstract class AbstractGwtMojo
      * @param urls the urls to add
      * @param startPosition the position to insert URLS
      * @return full classpath URL set
-     * @throws MojoExecutionException some error occured
+     * @throws org.apache.maven.plugin.MojoExecutionException some error occured
      */
-    protected int addClasspathElements( Collection<?> elements, URL[] urls, int startPosition )
+    protected int addClasspathElements( final Collection<?> elements, final URL[] urls, int startPosition )
         throws MojoExecutionException
     {
-        for ( Object object : elements )
+        for ( final Object object : elements )
         {
             try
             {
@@ -210,7 +215,7 @@ public abstract class AbstractGwtMojo
                     urls[startPosition] = new File( (String) object ).toURI().toURL();
                 }
             }
-            catch ( MalformedURLException e )
+            catch ( final MalformedURLException e )
             {
                 throw new MojoExecutionException(
                                                   "Failed to convert original classpath element " + object + " to URL.",
@@ -227,26 +232,26 @@ public abstract class AbstractGwtMojo
      *
      * @param scope Artifact.SCOPE_COMPILE or Artifact.SCOPE_TEST
      * @return a collection of dependencies as Files for the specified scope.
-     * @throws MojoExecutionException if classPath building failed
+     * @throws org.apache.maven.plugin.MojoExecutionException if classPath building failed
      */
-    public Collection<File> getClasspath( String scope )
+    public Collection<File> getClasspath( final String scope )
         throws MojoExecutionException
     {
         try
         {
-            Collection<File> files = classpathBuilder.buildClasspathList( getProject(), scope, getProjectArtifacts(), isGenerator() );
+            final Collection<File> files = classpathBuilder.buildClasspathList( getProject(), scope, getProjectArtifacts(), isGenerator() );
 
             if ( getLog().isDebugEnabled() )
             {
                 getLog().debug( "GWT SDK execution classpath :" );
-                for ( File f : files )
+                for ( final File f : files )
                 {
                     getLog().debug( "   " + f.getAbsolutePath() );
                 }
             }
             return files;
         }
-        catch ( ClasspathBuilderException e )
+        catch ( final ClasspathBuilderException e )
         {
             throw new MojoExecutionException( e.getMessage(), e );
         }
@@ -255,35 +260,55 @@ public abstract class AbstractGwtMojo
 
     /**
      * Whether to use processed resources and compiled classes ({@code false}), or raw resources ({@code true }).
+     *
+     * @return a boolean.
      */
     protected boolean isGenerator() {
         return false;
     }
 
+    /**
+     * <p>getGwtDevJar.</p>
+     *
+     * @return a {@link java.util.Collection} object.
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     */
     protected Collection<File> getGwtDevJar() throws MojoExecutionException
     {
         return getJarFiles( groupId + GWT_DEV );
     }
 
+    /**
+     * <p>getGwtUserJar.</p>
+     *
+     * @return a {@link java.util.Collection} object.
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     */
     protected Collection<File> getGwtUserJar() throws MojoExecutionException
     {
         return getJarFiles( groupId + GWT_USER );
     }
 
-    private Collection<File> getJarFiles(String artifactId) throws MojoExecutionException
+    private Collection<File> getJarFiles(final String artifactId) throws MojoExecutionException
     {
         checkGwtUserVersion();
-        Artifact rootArtifact = pluginArtifactMap.get( artifactId );
+        final Artifact rootArtifact = pluginArtifactMap.get( artifactId );
+
+        if (rootArtifact == null) {
+          getLog().warn("Unable to find " + artifactId+" in artifactMap."
+              + "You should explicitly include this dependency");
+          throw new MojoExecutionException( "Failed to resolve artifact "+artifactId+" from \n"+pluginArtifactMap);
+        }
 
         ArtifactResolutionResult result;
         try
         {
             // Code shamelessly copied from exec-maven-plugin.
-            MavenProject rootProject =
+            final MavenProject rootProject =
                             this.projectBuilder.buildFromRepository( rootArtifact, this.remoteRepositories,
                                                                      this.localRepository );
-            List<Dependency> dependencies = rootProject.getDependencies();
-            Set<Artifact> dependencyArtifacts =
+            final List<Dependency> dependencies = rootProject.getDependencies();
+            final Set<Artifact> dependencyArtifacts =
                             MavenMetadataSource.createArtifacts( artifactFactory, dependencies, null, null, null );
             dependencyArtifacts.add( rootProject.getArtifact() );
             result = resolver.resolveTransitively( dependencyArtifacts, rootArtifact,
@@ -291,15 +316,15 @@ public abstract class AbstractGwtMojo
                                                    remoteRepositories, artifactMetadataSource,
                                                    null, Collections.EMPTY_LIST);
         }
-        catch (Exception e)
+        catch (final Exception e)
         {
-            throw new MojoExecutionException( "Failed to resolve artifact", e);
+            throw new MojoExecutionException( "Failed to resolve artifact "+artifactId+" from \n"+pluginArtifactMap, e);
         }
 
-        Collection<Artifact> resolved = result.getArtifacts();
-        Collection<File> files = new ArrayList<File>(resolved.size() + 1 );
+        final Collection<Artifact> resolved = result.getArtifacts();
+        final Collection<File> files = new ArrayList<File>(resolved.size() + 1 );
         files.add( rootArtifact.getFile() );
-        for ( Artifact artifact : resolved )
+        for ( final Artifact artifact : resolved )
         {
             files.add( artifact.getFile() );
         }
@@ -312,15 +337,15 @@ public abstract class AbstractGwtMojo
      */
     private void checkGwtUserVersion() throws MojoExecutionException
     {
-        InputStream inputStream = Thread.currentThread().getContextClassLoader()
+        final InputStream inputStream = Thread.currentThread().getContextClassLoader()
             .getResourceAsStream( "org/codehaus/mojo/gwt/mojoGwtVersion.properties" );
-        Properties properties = new Properties();
+        final Properties properties = new Properties();
         try
         {
             properties.load( inputStream );
 
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             throw new MojoExecutionException( "Failed to load plugin properties", e );
         }
@@ -329,13 +354,13 @@ public abstract class AbstractGwtMojo
             IOUtils.closeQuietly( inputStream );
         }
 
-        Artifact gwtUser = project.getArtifactMap().get( groupId + GWT_USER );
+        final Artifact gwtUser = project.getArtifactMap().get( groupId + GWT_USER );
         if (gwtUser != null)
         {
-            String mojoGwtVersion = properties.getProperty( "gwt.version" );
+            final String mojoGwtVersion = properties.getProperty( "gwt.version" );
             //ComparableVersion with an up2date maven version
-            ArtifactVersion mojoGwtArtifactVersion = new DefaultArtifactVersion( mojoGwtVersion );
-            ArtifactVersion userGwtArtifactVersion = new DefaultArtifactVersion( gwtUser.getVersion() );
+            final ArtifactVersion mojoGwtArtifactVersion = new DefaultArtifactVersion( mojoGwtVersion );
+            final ArtifactVersion userGwtArtifactVersion = new DefaultArtifactVersion( gwtUser.getVersion() );
             if ( userGwtArtifactVersion.compareTo( mojoGwtArtifactVersion ) < 0 )
             {
                 getLog().warn( "Your project declares dependency on gwt-user " + gwtUser.getVersion()
@@ -344,21 +369,32 @@ public abstract class AbstractGwtMojo
         }
     }
 
-    protected Artifact resolve( String groupId, String artifactId, String version, String type, String classifier )
+    /**
+     * <p>resolve.</p>
+     *
+     * @param groupId a {@link java.lang.String} object.
+     * @param artifactId a {@link java.lang.String} object.
+     * @param version a {@link java.lang.String} object.
+     * @param type a {@link java.lang.String} object.
+     * @param classifier a {@link java.lang.String} object.
+     * @return a {@link org.apache.maven.artifact.Artifact} object.
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     */
+    protected Artifact resolve( final String groupId, final String artifactId, final String version, final String type, final String classifier )
         throws MojoExecutionException
     {
         // return project.getArtifactMap().get( groupId + ":" + artifactId );
 
-        Artifact artifact = artifactFactory.createArtifactWithClassifier( groupId, artifactId, version, type, classifier );
+        final Artifact artifact = artifactFactory.createArtifactWithClassifier( groupId, artifactId, version, type, classifier );
         try
         {
             resolver.resolve(artifact, remoteRepositories, localRepository);
         }
-        catch ( ArtifactNotFoundException e )
+        catch ( final ArtifactNotFoundException e )
         {
             throw new MojoExecutionException( "artifact not found - " + e.getMessage(), e );
         }
-        catch ( ArtifactResolutionException e )
+        catch ( final ArtifactResolutionException e )
         {
             throw new MojoExecutionException( "artifact resolver problem - " + e.getMessage(), e );
         }
@@ -366,19 +402,26 @@ public abstract class AbstractGwtMojo
     }
 
     /**
+     * <p>addCompileSourceRoot.</p>
+     *
      * @param path file to add to the project compile directories
      */
-    protected void addCompileSourceRoot( File path )
+    protected void addCompileSourceRoot( final File path )
     {
         getProject().addCompileSourceRoot( path.getAbsolutePath() );
     }
 
+    /**
+     * <p>addExtraSources.</p>
+     */
     protected void addExtraSources() {
-      for (File extraSource : extraSources) {
+      for (final File extraSource : extraSources) {
         addCompileSourceRoot(extraSource);
       }
     }
     /**
+     * <p>Getter for the field <code>project</code>.</p>
+     *
      * @return the project
      */
     public MavenProject getProject()
@@ -387,16 +430,31 @@ public abstract class AbstractGwtMojo
     }
 
 
+    /**
+     * <p>Getter for the field <code>localRepository</code>.</p>
+     *
+     * @return a {@link org.apache.maven.artifact.repository.ArtifactRepository} object.
+     */
     public ArtifactRepository getLocalRepository()
     {
         return this.localRepository;
     }
 
+    /**
+     * <p>Getter for the field <code>remoteRepositories</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<ArtifactRepository> getRemoteRepositories()
     {
         return this.remoteRepositories;
     }
 
+    /**
+     * <p>setupGenerateDirectory.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     protected File setupGenerateDirectory() {
         if ( !generateDirectory.exists() )
         {
@@ -408,6 +466,11 @@ public abstract class AbstractGwtMojo
         return generateDirectory;
     }
 
+    /**
+     * <p>Getter for the field <code>generateDirectory</code>.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     public File getGenerateDirectory()
     {
         if ( !generateDirectory.exists() )
@@ -418,17 +481,27 @@ public abstract class AbstractGwtMojo
         return generateDirectory;
     }
 
+    /**
+     * <p>getProjectArtifacts.</p>
+     *
+     * @return a {@link java.util.Set} object.
+     */
     public Set<Artifact> getProjectArtifacts()
     {
         return project.getArtifacts();
     }
 
+    /**
+     * <p>getProjectRuntimeArtifacts.</p>
+     *
+     * @return a {@link java.util.Set} object.
+     */
     public Set<Artifact> getProjectRuntimeArtifacts()
     {
-        Set<Artifact> artifacts = new HashSet<Artifact>();
-        for (Artifact projectArtifact : project.getArtifacts() )
+        final Set<Artifact> artifacts = new HashSet<Artifact>();
+        for (final Artifact projectArtifact : project.getArtifacts() )
         {
-            String scope = projectArtifact.getScope();
+            final String scope = projectArtifact.getScope();
             if ( SCOPE_RUNTIME.equals( scope )
               || SCOPE_COMPILE.equals( scope ) )
             {

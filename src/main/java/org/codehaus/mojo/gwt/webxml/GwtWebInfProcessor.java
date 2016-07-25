@@ -40,7 +40,10 @@ import org.jdom.output.XMLOutputter;
 import org.jdom.xpath.XPath;
 
 /**
+ * <p>GwtWebInfProcessor class.</p>
+ *
  * @version $Id$
+ * @author james
  */
 public class GwtWebInfProcessor
 {
@@ -62,12 +65,27 @@ public class GwtWebInfProcessor
             "resource-ref", "security-constraint", "login-config", "security-role", "env-entry", "ejb-ref",
             "ejb-local-ref" };
 
+    /**
+     * <p>process.</p>
+     *
+     * @param webXml a {@link java.io.File} object.
+     * @param servletDescriptors a {@link java.util.Collection} object.
+     * @throws java.lang.Exception if any.
+     */
     public void process( File webXml, Collection<ServletDescriptor> servletDescriptors )
         throws Exception
     {
         process( webXml, webXml, servletDescriptors );
     }
 
+    /**
+     * <p>process.</p>
+     *
+     * @param sourceWebXml a {@link java.io.File} object.
+     * @param mergeWebXml a {@link java.io.File} object.
+     * @param servletDescriptors a {@link java.util.Collection} object.
+     * @throws java.lang.Exception if any.
+     */
     public void process( File sourceWebXml, File mergeWebXml, Collection<ServletDescriptor> servletDescriptors )
         throws Exception
     {

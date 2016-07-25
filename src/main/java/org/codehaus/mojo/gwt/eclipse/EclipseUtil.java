@@ -29,6 +29,8 @@ import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 
 /**
+ * <p>EclipseUtil class.</p>
+ *
  * @author ndeloof
  * @version $Id$
  */
@@ -40,6 +42,7 @@ public class EclipseUtil
      * Read the Eclipse project name for .project file. Fall back to artifactId on error
      *
      * @return project name in eclipse workspace
+     * @param project a {@link org.apache.maven.project.MavenProject} object.
      */
     public String getProjectName( MavenProject project )
     {

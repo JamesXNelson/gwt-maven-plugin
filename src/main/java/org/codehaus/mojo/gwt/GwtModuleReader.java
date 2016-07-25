@@ -25,12 +25,27 @@ import org.codehaus.mojo.gwt.utils.GwtModuleReaderException;
 
 
 /**
+ * <p>GwtModuleReader interface.</p>
+ *
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
+ * @version $Id: $Id
  */
 public interface GwtModuleReader
 {
+    /**
+     * <p>readModule.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.GwtModule} object.
+     * @throws org.codehaus.mojo.gwt.utils.GwtModuleReaderException if any.
+     */
     GwtModule readModule( String name )
 		throws GwtModuleReaderException;
     
+    /**
+     * <p>getGwtModules.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     List<String> getGwtModules();
 }

@@ -143,6 +143,8 @@ public class EclipseMojo
     private boolean useGoogleEclipsePlugin;
 
     /**
+     * <p>Setter for the field <code>additionalPageParameters</code>.</p>
+     *
      * @param parameters additional parameter for module URL
      */
     public void setAdditionalPageParameters( String parameters )
@@ -155,6 +157,8 @@ public class EclipseMojo
      * {@inheritDoc}
      *
      * @see org.apache.maven.plugin.Mojo#execute()
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
      */
     public void execute()
         throws MojoExecutionException, MojoFailureException
@@ -175,6 +179,11 @@ public class EclipseMojo
         }
     }
 
+    /**
+     * <p>setupExplodedWar.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     */
     protected void setupExplodedWar()
         throws MojoExecutionException
     {

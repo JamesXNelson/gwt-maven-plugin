@@ -60,6 +60,9 @@ abstract class GwtResourcesBaseMojo
 
     /**
      * Collect GWT java source code and module descriptor to be added as resources.
+     *
+     * @return a {@link java.util.Collection} object.
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
      */
     protected Collection<ResourceFile> getAllResourceFiles()
         throws MojoExecutionException

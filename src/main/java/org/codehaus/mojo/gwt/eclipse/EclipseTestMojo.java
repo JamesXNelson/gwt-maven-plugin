@@ -75,7 +75,6 @@ public class EclipseTestMojo
 
     /**
      * {@inheritDoc}
-     *
      * @see org.apache.maven.plugin.Mojo#execute()
      */
     @Override

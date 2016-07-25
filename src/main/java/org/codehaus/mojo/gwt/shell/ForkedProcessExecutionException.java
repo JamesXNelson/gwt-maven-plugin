@@ -23,15 +23,19 @@ package org.codehaus.mojo.gwt.shell;
 import org.apache.maven.plugin.MojoExecutionException;
 
 /**
- * 
+ * <p>ForkedProcessExecutionException class.</p>
+ *
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
+ * @version $Id: $Id
  */
 public class ForkedProcessExecutionException
     extends MojoExecutionException
 {
 
     /**
-     * @param message
+     * <p>Constructor for ForkedProcessExecutionException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
      */
     public ForkedProcessExecutionException( String message )
     {
@@ -39,8 +43,10 @@ public class ForkedProcessExecutionException
     }
 
     /**
-     * @param message
-     * @param cause
+     * <p>Constructor for ForkedProcessExecutionException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Exception} object.
      */
     public ForkedProcessExecutionException( String message, Exception cause )
     {
@@ -48,8 +54,10 @@ public class ForkedProcessExecutionException
     }
 
     /**
-     * @param message
-     * @param cause
+     * <p>Constructor for ForkedProcessExecutionException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Throwable} object.
      */
     public ForkedProcessExecutionException( String message, Throwable cause )
     {
@@ -57,9 +65,11 @@ public class ForkedProcessExecutionException
     }
 
     /**
-     * @param source
-     * @param shortMessage
-     * @param longMessage
+     * <p>Constructor for ForkedProcessExecutionException.</p>
+     *
+     * @param source a {@link java.lang.Object} object.
+     * @param shortMessage a {@link java.lang.String} object.
+     * @param longMessage a {@link java.lang.String} object.
      */
     public ForkedProcessExecutionException( Object source, String shortMessage, String longMessage )
     {

@@ -37,7 +37,10 @@ import org.codehaus.plexus.util.xml.Xpp3Dom;
 
 
 /**
+ * <p>GwtModule class.</p>
+ *
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
+ * @version $Id: $Id
  */
 public class GwtModule
 {
@@ -51,6 +54,13 @@ public class GwtModule
     
     private File sourceFile;
 
+    /**
+     * <p>Constructor for GwtModule.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param xml a {@link org.codehaus.plexus.util.xml.Xpp3Dom} object.
+     * @param reader a {@link org.codehaus.mojo.gwt.GwtModuleReader} object.
+     */
     public GwtModule( String name, Xpp3Dom xml, GwtModuleReader reader )
     {
         this.name = name;
@@ -63,12 +73,22 @@ public class GwtModule
         return xml.getAttribute( "rename-to" );
     }
 
+    /**
+     * <p>getPublic.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPublic()
     {
         Xpp3Dom node = xml.getChild( "public" );
         return ( node == null ? "public" : node.getAttribute( "path" ) );
     }
 
+    /**
+     * <p>getSuperSources.</p>
+     *
+     * @return an array of {@link java.lang.String} objects.
+     */
     public String[] getSuperSources()
     {
         Xpp3Dom nodes[] = xml.getChildren( "super-source" );
@@ -90,6 +110,11 @@ public class GwtModule
         return superSources;
     }
 
+    /**
+     * <p>getSources.</p>
+     *
+     * @return an array of {@link java.lang.String} objects.
+     */
     public String[] getSources()
     {
         Xpp3Dom nodes[] = xml.getChildren( "source" );
@@ -106,6 +131,12 @@ public class GwtModule
         return sources;
     }
 
+    /**
+     * <p>getEntryPoints.</p>
+     *
+     * @return a {@link java.util.List} object.
+     * @throws org.codehaus.mojo.gwt.utils.GwtModuleReaderException if any.
+     */
     public List<String> getEntryPoints()
         throws GwtModuleReaderException
     {
@@ -136,6 +167,9 @@ public class GwtModule
     /**
      * Build the set of inhertied modules. Due to xml inheritence mecanism, there may be cicles in the inheritence
      * graph, so we build a set of inherited modules
+     *
+     * @return a {@link java.util.Set} object.
+     * @throws org.codehaus.mojo.gwt.utils.GwtModuleReaderException if any.
      */
     public Set<GwtModule> getInherits()
 		throws GwtModuleReaderException
@@ -192,12 +226,25 @@ public class GwtModule
         return modules;
     }
 
+    /**
+     * <p>getServlets.</p>
+     *
+     * @return a {@link java.util.Map} object.
+     * @throws org.codehaus.mojo.gwt.utils.GwtModuleReaderException if any.
+     */
     public Map<String, String> getServlets()
         throws GwtModuleReaderException
     {
         return getServlets( getPath() );
     }
 
+    /**
+     * <p>getServlets.</p>
+     *
+     * @param path a {@link java.lang.String} object.
+     * @return a {@link java.util.Map} object.
+     * @throws org.codehaus.mojo.gwt.utils.GwtModuleReaderException if any.
+     */
     public Map<String, String> getServlets( String path )
         throws GwtModuleReaderException
     {
@@ -224,17 +271,32 @@ public class GwtModule
         return servlets;
     }
 
+    /**
+     * <p>Getter for the field <code>name</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * <p>getPackage.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPackage()
     {
         int index = name.lastIndexOf( '.' );
         return ( index < 0 ) ? "" : name.substring( 0, index );
     }
 
+    /**
+     * <p>getPath.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPath()
     {
         if ( getRenameTo() != null )
@@ -244,20 +306,32 @@ public class GwtModule
         return name;
     }
 
+    /**
+     * <p>Getter for the field <code>sourceFile</code>.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     public File getSourceFile() {
     	return sourceFile;
     }
     
+    /**
+     * <p>Setter for the field <code>sourceFile</code>.</p>
+     *
+     * @param file a {@link java.io.File} object.
+     */
     public void setSourceFile(File file) {
 		this.sourceFile = file;
 	}
 	
+    /** {@inheritDoc} */
     @Override
     public boolean equals( Object obj )
     {
         return name.equals( ( (GwtModule) obj ).name );
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode()
     {

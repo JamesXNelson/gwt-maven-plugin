@@ -39,7 +39,7 @@ import java.util.Collection;
  * Mimic surefire to run GWTTestCases during integration-test phase, until SUREFIRE-508 is fixed
  *
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
- * @see http://code.google.com/intl/fr/webtoolkit/doc/latest/DevGuideTesting.html
+ * see http://code.google.com/intl/fr/webtoolkit/doc/latest/DevGuideTesting.html
  * @version $Id: TestMojo.java 9466 2009-04-16 12:03:15Z ndeloof $
  */
 @Mojo(name = "test", defaultPhase = LifecyclePhase.INTEGRATION_TEST, requiresDependencyResolution = ResolutionScope.TEST, threadSafe = true)
@@ -95,7 +95,7 @@ public class TestMojo
     /**
      * run tests using production mode rather than development (a.k.a. hosted) mode.
      * 
-     * @see http://code.google.com/intl/fr-FR/webtoolkit/doc/latest/DevGuideCompilingAndDebugging.html#DevGuideProdMode
+     * see http://code.google.com/intl/fr-FR/webtoolkit/doc/latest/DevGuideCompilingAndDebugging.html#DevGuideProdMode
      */
     @Parameter(defaultValue = "false", property = "gwt.test.prod")
     private boolean productionMode;
@@ -112,7 +112,7 @@ public class TestMojo
      * Configure options to run tests with HTMLUnit. The value must descrivbe the browser emulation
      * to be used, FF17, IE8, IE9 or Chrome (possible multiple values separated by comas).
      * 
-     * @see http://code.google.com/intl/fr/webtoolkit/doc/latest/DevGuideTestingHtmlUnit.html
+     * see http://code.google.com/intl/fr/webtoolkit/doc/latest/DevGuideTestingHtmlUnit.html
      */
     @Parameter(defaultValue = "FF17", property = "gwt.test.htmlunit")
     private String htmlunit;
@@ -121,7 +121,7 @@ public class TestMojo
      * Configure options to run tests with Selenium. The value must describe the Selenium Remote
      * Control target
      * 
-     * @see http://code.google.com/intl/fr/webtoolkit/doc/latest/DevGuideTestingRemoteTesting.html#Selenium
+     * see http://code.google.com/intl/fr/webtoolkit/doc/latest/DevGuideTestingRemoteTesting.html#Selenium
      */
     @Parameter(property = "gwt.test.selenium")
     private String selenium;
@@ -156,7 +156,13 @@ public class TestMojo
      */
     @Parameter(defaultValue = "${project.build.directory}/surefire-reports")
     private File reportsDirectory;
-    
+
+    /**
+     * Directory for deployed artifacts, defaults to target/test-classes/WEB-INF/deploy, to allow all deployed resources to be visible to servlets
+     */
+    @Parameter(defaultValue = "${project.build.directory}/test-classes/WEB-INF/deploy")
+    private File deployDirectory;
+
     /**
      * Specify the user agents to reduce the number of permutations in '-prod' mode;
      * e.g. ie8,safari,gecko1_8
@@ -385,6 +391,7 @@ public class TestMojo
     /** failures counter */
     private int failures;
 
+    /** {@inheritDoc} */
     @Override
     public void doExecute()
         throws MojoExecutionException, MojoFailureException
@@ -417,8 +424,6 @@ public class TestMojo
     }
 
     /**
-     * @param classpath the test execution classpath
-     * @param jvm the JVM process command
      * @param test the test to run
      * @throws MojoExecutionException some error occured
      */
@@ -473,6 +478,11 @@ public class TestMojo
         }
     }
 
+    /**
+     * <p>getGwtArgs.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     protected String getGwtArgs()
     {
         StringBuilder sb = new StringBuilder();
@@ -546,8 +556,16 @@ public class TestMojo
         {
             sb.append( " -batch " ).append( quote( batch ) );
         }
+        if ( deployDirectory != null )
+        {
+            if (!deployDirectory.exists()) {
+              deployDirectory.mkdirs();
+            }
+            sb.append( " -deploy " ).append( quote( deployDirectory.getAbsolutePath()) );
+        }
         // TODO Is addArgumentDeploy(cmd) also needed to get readable test stacktraces with an alternative deploy dir?
 
+      getLog().error(sb);
         return sb.toString();
     }
 
@@ -555,6 +573,7 @@ public class TestMojo
         return StringUtils.quoteAndEscape( arg, '"', new char[] { '"', ' ', '\t', '\r', '\n' } );
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void postProcessClassPath( Collection<File> classpath )
     {
@@ -598,6 +617,8 @@ public class TestMojo
     }
 
     /**
+     * <p>Setter for the field <code>testTimeOut</code>.</p>
+     *
      * @param testTimeOut the testTimeOut to set
      */
     public void setTestTimeOut( int testTimeOut )

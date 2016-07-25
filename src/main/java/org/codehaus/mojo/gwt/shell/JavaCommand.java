@@ -37,8 +37,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * <p>JavaCommand class.</p>
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 public class JavaCommand
 {
@@ -84,61 +87,121 @@ public class JavaCommand
         }
     };
 
+    /**
+     * <p>Getter for the field <code>mainClass</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getMainClass()
     {
         return mainClass;
     }
 
+    /**
+     * <p>Setter for the field <code>mainClass</code>.</p>
+     *
+     * @param mainClass a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setMainClass( String mainClass )
     {
         this.mainClass = mainClass;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>classpath</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<File> getClasspath()
     {
         return classpath;
     }
 
+    /**
+     * <p>Setter for the field <code>classpath</code>.</p>
+     *
+     * @param classpath a {@link java.util.List} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setClasspath( List<File> classpath )
     {
         this.classpath = classpath;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>args</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<String> getArgs()
     {
         return args;
     }
 
+    /**
+     * <p>Setter for the field <code>args</code>.</p>
+     *
+     * @param args a {@link java.util.List} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setArgs( List<String> args )
     {
         this.args = args;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>systemProperties</code>.</p>
+     *
+     * @return a {@link java.util.Properties} object.
+     */
     public Properties getSystemProperties()
     {
         return systemProperties;
     }
 
+    /**
+     * <p>Setter for the field <code>systemProperties</code>.</p>
+     *
+     * @param systemProperties a {@link java.util.Properties} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setSystemProperties( Properties systemProperties )
     {
         this.systemProperties = systemProperties;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>env</code>.</p>
+     *
+     * @return a {@link java.util.Properties} object.
+     */
     public Properties getEnv()
     {
         return env;
     }
 
+    /**
+     * <p>Setter for the field <code>env</code>.</p>
+     *
+     * @param env a {@link java.util.Properties} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setEnv( Properties env )
     {
         this.env = env;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jvmArgs</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<String> getJvmArgs()
     {
         if (this.jvmArgs == null)
@@ -148,91 +211,184 @@ public class JavaCommand
         return jvmArgs;
     }
 
+    /**
+     * <p>Setter for the field <code>jvmArgs</code>.</p>
+     *
+     * @param jvmArgs a {@link java.util.List} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setJvmArgs( List<String> jvmArgs )
     {
         this.jvmArgs = jvmArgs;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jvm</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getJvm()
     {
         return jvm;
     }
 
+    /**
+     * <p>Setter for the field <code>jvm</code>.</p>
+     *
+     * @param jvm a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setJvm( String jvm )
     {
         this.jvm = jvm;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>log</code>.</p>
+     *
+     * @return a {@link org.apache.maven.plugin.logging.Log} object.
+     */
     public Log getLog()
     {
         return log;
     }
 
+    /**
+     * <p>Setter for the field <code>log</code>.</p>
+     *
+     * @param log a {@link org.apache.maven.plugin.logging.Log} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setLog( Log log )
     {
         this.log = log;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>timeOut</code>.</p>
+     *
+     * @return a int.
+     */
     public int getTimeOut()
     {
         return timeOut;
     }
 
+    /**
+     * <p>Setter for the field <code>timeOut</code>.</p>
+     *
+     * @param timeOut a int.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setTimeOut( int timeOut )
     {
         this.timeOut = timeOut;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>classPathProcessors</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<ClassPathProcessor> getClassPathProcessors()
     {
         return classPathProcessors;
     }
 
+    /**
+     * <p>addClassPathProcessors.</p>
+     *
+     * @param classPathProcessor a {@link org.codehaus.mojo.gwt.shell.ClassPathProcessor} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand addClassPathProcessors( ClassPathProcessor classPathProcessor )
     {
         classPathProcessors.add( classPathProcessor );
         return this;
     }
 
+    /**
+     * <p>Setter for the field <code>classPathProcessors</code>.</p>
+     *
+     * @param classPathProcessors a {@link java.util.List} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setClassPathProcessors( List<ClassPathProcessor> classPathProcessors )
     {
         this.classPathProcessors = classPathProcessors;
         return this;
     }
 
+    /**
+     * <p>Setter for the field <code>out</code>.</p>
+     *
+     * @param out a {@link org.codehaus.plexus.util.cli.StreamConsumer} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand setOut( StreamConsumer out )
     {
         this.out = out;
         return this;
     }
 
+    /**
+     * <p>addToClasspath.</p>
+     *
+     * @param file a {@link java.io.File} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand addToClasspath( File file )
     {
         return addToClasspath( Collections.singleton( file ) );
     }
 
+    /**
+     * <p>addToClasspath.</p>
+     *
+     * @param elements a {@link java.util.Collection} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand addToClasspath( Collection<File> elements )
     {
         classpath.addAll( elements );
         return this;
     }
 
+    /**
+     * <p>prependToClasspath.</p>
+     *
+     * @param elements a {@link java.util.Collection} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand prependToClasspath( Collection<File> elements )
     {
         classpath.addAll( 0, elements );
         return this;
     }
 
+    /**
+     * <p>arg.</p>
+     *
+     * @param arg a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand arg( String arg )
     {
         args.add( arg );
         return this;
     }
 
+    /**
+     * <p>arg.</p>
+     *
+     * @param arg a {@link java.lang.String} object.
+     * @param value a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand arg( String arg, String value )
     {
         args.add( arg );
@@ -240,6 +396,13 @@ public class JavaCommand
         return this;
     }
 
+    /**
+     * <p>arg.</p>
+     *
+     * @param condition a boolean.
+     * @param arg a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand arg( boolean condition, String arg )
     {
         if ( condition )
@@ -249,18 +412,37 @@ public class JavaCommand
         return this;
     }
 
+    /**
+     * <p>systemProperty.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param value a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand systemProperty( String name, String value )
     {
         systemProperties.setProperty( name, value );
         return this;
     }
 
+    /**
+     * <p>environment.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param value a {@link java.lang.String} object.
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     public JavaCommand environment( String name, String value )
     {
         env.setProperty( name, value );
         return this;
     }
 
+    /**
+     * <p>execute.</p>
+     *
+     * @throws org.codehaus.mojo.gwt.shell.JavaCommandException if any.
+     */
     public void execute()
         throws JavaCommandException
     {

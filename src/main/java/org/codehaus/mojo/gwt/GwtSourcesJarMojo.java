@@ -39,8 +39,9 @@ import org.codehaus.plexus.archiver.jar.JarArchiver;
 /**
  * Add GWT java source code and module descriptor as resources to project jar. Alternative
  * to gwt:resources for better Eclipse projects synchronization.
- * 
+ *
  * @author <a href="mailto:vlads@pyx4j.com">Vlad Skarzhevskyy</a>
+ * @version $Id: $Id
  */
 @Mojo(name = "source-jar", defaultPhase = LifecyclePhase.PACKAGE, threadSafe = true)
 public class GwtSourcesJarMojo
@@ -71,8 +72,10 @@ public class GwtSourcesJarMojo
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.apache.maven.plugin.Mojo#execute()
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
      */
     public void execute()
         throws MojoExecutionException, MojoFailureException

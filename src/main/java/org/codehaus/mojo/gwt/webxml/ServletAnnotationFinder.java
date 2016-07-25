@@ -42,17 +42,21 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 
 /**
- * The goal is to find classed annotated with {@link RemoteServiceRelativePath}
- * to generated {@link ServletDescriptor}
- * 
+ * The goal is to find classed annotated with {@link com.google.gwt.user.client.rpc.RemoteServiceRelativePath}
+ * to generated {@link org.codehaus.mojo.gwt.webxml.ServletDescriptor}
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 @Component(role = ServletAnnotationFinder.class)
 public class ServletAnnotationFinder
     extends AbstractLogEnabled
 {
 
+    /**
+     * <p>Constructor for ServletAnnotationFinder.</p>
+     */
     public ServletAnnotationFinder()
     {
         // no op
@@ -110,9 +114,13 @@ public class ServletAnnotationFinder
 	}
 
     /**
-     * @param packageName
+     * <p>findServlets.</p>
+     *
+     * @param packageName a {@link java.lang.String} object.
      * @return cannot return <code>null</null>
-     * @throws IOException
+     * @throws java.io.IOException if any.
+     * @param startPath a {@link java.lang.String} object.
+     * @param classLoader a {@link java.lang.ClassLoader} object.
      */
     public Set<ServletDescriptor> findServlets( String packageName, String startPath, ClassLoader classLoader )
         throws IOException

@@ -36,6 +36,7 @@ import java.io.File;
  *
  * @author t.broyer
  * @since 2.5.0-rc1
+ * @version $Id: $Id
  */
 @Mojo(name = "run-codeserver", requiresDirectInvocation = true, requiresDependencyResolution = ResolutionScope.COMPILE)
 @Execute(phase = LifecyclePhase.PROCESS_CLASSES)
@@ -138,6 +139,7 @@ public class SuperDevModeMojo extends AbstractGwtShellMojo
     @Parameter(defaultValue = "${executedProject}")
     private MavenProject executedProject;
 
+    /** {@inheritDoc} */
     @Override
     public void doExecute()
         throws MojoExecutionException, MojoFailureException
@@ -212,11 +214,17 @@ public class SuperDevModeMojo extends AbstractGwtShellMojo
         }
     }
 
+    /**
+     * <p>Setter for the field <code>executedProject</code>.</p>
+     *
+     * @param executedProject a {@link org.apache.maven.project.MavenProject} object.
+     */
     public void setExecutedProject( MavenProject executedProject )
     {
         this.executedProject = executedProject;
     }
 
+    /** {@inheritDoc} */
     @Override
     public MavenProject getProject()
     {

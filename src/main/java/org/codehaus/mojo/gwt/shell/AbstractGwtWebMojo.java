@@ -25,6 +25,8 @@ import java.io.File;
 
 
 /**
+ * <p>Abstract AbstractGwtWebMojo class.</p>
+ *
  * @author ndeloof
  * @version $Id$
  */
@@ -45,11 +47,21 @@ public abstract class AbstractGwtWebMojo
     @Parameter(defaultValue = "false")
     private boolean webXmlServletPathAsIs;
 
+    /**
+     * <p>Getter for the field <code>webXml</code>.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     public File getWebXml()
     {
         return webXml;
     }
 
+    /**
+     * <p>isWebXmlServletPathAsIs.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isWebXmlServletPathAsIs()
     {
         return webXmlServletPathAsIs;

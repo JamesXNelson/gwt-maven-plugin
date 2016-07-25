@@ -79,11 +79,18 @@ public class I18NMojo
     private String i18nConstantsWithLookupBundle;
 
     
+    /** {@inheritDoc} */
     @Override
     protected boolean isGenerator() {
         return true;
     }
     
+    /**
+     * <p>doExecute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
+     */
     public void doExecute( )
         throws MojoExecutionException, MojoFailureException
     {

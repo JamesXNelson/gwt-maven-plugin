@@ -54,7 +54,11 @@ public class MavenTestRunner
     /** flag for test failures */
     private boolean testHadFailed;
 
-    /** entry point for runner in a dedicated JVM */
+    /**
+     * entry point for runner in a dedicated JVM
+     *
+     * @param args an array of {@link java.lang.String} objects.
+     */
     public static void main( String args[] )
     {
         try
@@ -77,7 +81,6 @@ public class MavenTestRunner
 
     /**
      * {@inheritDoc}
-     *
      * @see junit.textui.TestRunner#createTestResult()
      */
     @Override
@@ -90,7 +93,6 @@ public class MavenTestRunner
 
     /**
      * {@inheritDoc}
-     *
      * @see junit.textui.TestRunner#doRun(junit.framework.Test, boolean)
      */
     @Override
@@ -119,7 +121,7 @@ public class MavenTestRunner
     }
 
     /**
-     *
+     * <p>Constructor for MavenTestRunner.</p>
      */
     public MavenTestRunner()
     {
@@ -132,8 +134,9 @@ public class MavenTestRunner
     }
 
     /**
+     * {@inheritDoc}
+     *
      * A test started.
-     * @param test the test
      */
     public void startTest( Test test )
     {
@@ -143,8 +146,9 @@ public class MavenTestRunner
     }
 
     /**
+     * {@inheritDoc}
+     *
      * A test ended.
-     * @param test the test
      */
     public void endTest( Test test )
     {
@@ -157,9 +161,9 @@ public class MavenTestRunner
     }
 
     /**
+     * {@inheritDoc}
+     *
      * An error occurred.
-     * @param test the test
-     * @param t the error
      */
     public void addError( Test test, Throwable t )
     {
@@ -172,9 +176,9 @@ public class MavenTestRunner
     }
 
     /**
+     * {@inheritDoc}
+     *
      * A failure occurred.
-     * @param test the test
-     * @param t the failure
      */
     public void addFailure( Test test, AssertionFailedError t )
     {

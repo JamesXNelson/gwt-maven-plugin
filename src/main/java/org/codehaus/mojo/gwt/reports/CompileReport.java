@@ -43,8 +43,10 @@ import org.codehaus.plexus.util.FileUtils;
 
 /**
  * see http://code.google.com/webtoolkit/doc/latest/DevGuideCompileReport.html#Usage
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 @Mojo(name = "compile-report", threadSafe = true)
 public class CompileReport
@@ -113,6 +115,7 @@ public class CompileReport
      * {@inheritDoc}
      *
      * @see org.apache.maven.reporting.MavenReport#canGenerateReport()
+     * @return a boolean.
      */
     public boolean canGenerateReport()
     {
@@ -124,6 +127,7 @@ public class CompileReport
      * {@inheritDoc}
      *
      * @see org.apache.maven.reporting.MavenReport#getCategoryName()
+     * @return a {@link java.lang.String} object.
      */
     public String getCategoryName()
     {
@@ -132,7 +136,6 @@ public class CompileReport
 
     /**
      * {@inheritDoc}
-     *
      * @see org.apache.maven.reporting.MavenReport#getDescription(java.util.Locale)
      */
     public String getDescription( Locale locale )
@@ -142,7 +145,6 @@ public class CompileReport
 
     /**
      * {@inheritDoc}
-     *
      * @see org.apache.maven.reporting.MavenReport#getName(java.util.Locale)
      */
     public String getName( Locale locale )
@@ -154,6 +156,7 @@ public class CompileReport
      * {@inheritDoc}
      *
      * @see org.apache.maven.reporting.MavenReport#getOutputName()
+     * @return a {@link java.lang.String} object.
      */
     public String getOutputName()
     {
@@ -164,33 +167,35 @@ public class CompileReport
      * {@inheritDoc}
      *
      * @see org.apache.maven.reporting.MavenReport#isExternalReport()
+     * @return a boolean.
      */
     public boolean isExternalReport()
     {
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Renderer getSiteRenderer()
     {
         return siteRenderer;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getOutputDirectory()
     {
         return outputDirectory.getAbsolutePath();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected MavenProject getProject()
     {
         return project;
     }    
    
-    /**
-     * @see org.apache.maven.reporting.AbstractMavenReport#executeReport(java.util.Locale)
-     */
+    /** {@inheritDoc} */
     @Override
     protected void executeReport( Locale locale )
         throws MavenReportException

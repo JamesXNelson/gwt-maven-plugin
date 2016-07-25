@@ -30,10 +30,19 @@ import org.codehaus.plexus.util.cli.shell.Shell;
  * plexus-util hack to run a command WITHOUT a shell
  *
  * @see PLXUTILS-107
+ * @author james
+ * @version $Id: $Id
  */
 public class JavaShell
     extends Shell
 {
+    /**
+     * <p>getRawCommandLine.</p>
+     *
+     * @param executable a {@link java.lang.String} object.
+     * @param arguments an array of {@link java.lang.String} objects.
+     * @return a {@link java.util.List} object.
+     */
     protected List<String> getRawCommandLine( String executable, String[] arguments )
     {
         List<String> commandLine = new ArrayList<String>();

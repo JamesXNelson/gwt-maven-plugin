@@ -20,6 +20,7 @@ package org.codehaus.mojo.gwt.webxml;
  */
 
 /**
+ * <p>ExitException class.</p>
  *
  * @author cooper
  * @version $Id$
@@ -28,7 +29,11 @@ public class ExitException
     extends Exception
 {
 
-    /** Creates a new instance of ExitException */
+    /**
+     * Creates a new instance of ExitException
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public ExitException( String message )
     {
         super( message );

@@ -27,6 +27,8 @@ import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 /**
+ * <p>TestTemplate class.</p>
+ *
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
  * @version $Id$
  */
@@ -47,11 +49,13 @@ public class TestTemplate
     }
 
     /**
+     * <p>Constructor for TestTemplate.</p>
+     *
      * @param project the maven project
      * @param includes inclusion patterns
      * @param excludes exclusion patterns
      * @param callBack what to do with thoses tests
-     * @throws MojoExecutionException some error occured
+     * @throws org.apache.maven.plugin.MojoExecutionException some error occured
      */
     public TestTemplate( MavenProject project, String includes, String excludes, CallBack callBack )
         throws MojoExecutionException

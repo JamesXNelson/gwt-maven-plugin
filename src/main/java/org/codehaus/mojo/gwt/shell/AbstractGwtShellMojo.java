@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Support running GWT SDK Tools as forked JVM with classpath set according to project source/resource directories and
  * dependencies.
- * 
+ *
  * @author ccollins
  * @author cooper
  * @author willpugh
@@ -152,6 +152,8 @@ public abstract class AbstractGwtShellMojo
      * {@inheritDoc}
      *
      * @see org.apache.maven.plugin.Mojo#execute()
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
      */
     public final void execute()
         throws MojoExecutionException, MojoFailureException
@@ -159,25 +161,51 @@ public abstract class AbstractGwtShellMojo
         doExecute();
     }
 
+    /**
+     * <p>doExecute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
+     */
     public abstract void doExecute()
         throws MojoExecutionException, MojoFailureException;
 
+    /**
+     * <p>Getter for the field <code>extraJvmArgs</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     protected String getExtraJvmArgs()
     {
         return extraJvmArgs;
     }
 
+    /**
+     * <p>Getter for the field <code>logLevel</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     protected String getLogLevel()
     {
         return this.logLevel;
     }
 
+    /**
+     * <p>Getter for the field <code>style</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     protected String getStyle()
     {
         return this.style;
     }
 
 
+    /**
+     * <p>Getter for the field <code>jvm</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     protected String getJvm()
     {
         return jvm;
@@ -185,6 +213,8 @@ public abstract class AbstractGwtShellMojo
 
     /**
      * hook to post-process the dependency-based classpath
+     *
+     * @param classpath a {@link java.util.Collection} object.
      */
     protected void postProcessClassPath( Collection<File> classpath )
     {
@@ -210,6 +240,8 @@ public abstract class AbstractGwtShellMojo
     }
 
     /**
+     * <p>Setter for the field <code>timeOut</code>.</p>
+     *
      * @param timeOut the timeOut to set
      */
     public void setTimeOut( int timeOut )
@@ -217,6 +249,11 @@ public abstract class AbstractGwtShellMojo
         this.timeOut = timeOut;
     }
 
+    /**
+     * <p>createJavaCommand.</p>
+     *
+     * @return a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     protected JavaCommand createJavaCommand() {
         return new JavaCommand()
             .setLog( getLog() )
@@ -240,6 +277,9 @@ public abstract class AbstractGwtShellMojo
      * <p>
      * The hack can also be used to include utility code from external librariries that may not have been designed for
      * GWT.
+     *
+     * @param cmd a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
      */
     protected void addCompileSourceArtifacts(JavaCommand cmd)
             throws MojoExecutionException
@@ -280,6 +320,11 @@ public abstract class AbstractGwtShellMojo
         }
     }
 
+    /**
+     * <p>addArgumentDeploy.</p>
+     *
+     * @param cmd a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     protected void addArgumentDeploy(JavaCommand cmd) {
         if ( deploy != null )
         {
@@ -287,6 +332,11 @@ public abstract class AbstractGwtShellMojo
         }
     }
 
+    /**
+     * <p>addArgumentGen.</p>
+     *
+     * @param cmd a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     protected void addArgumentGen( JavaCommand cmd )
     {
         if ( this.genParam )
@@ -299,6 +349,11 @@ public abstract class AbstractGwtShellMojo
         }
     }
 
+    /**
+     * <p>addPersistentUnitCache.</p>
+     *
+     * @param cmd a {@link org.codehaus.mojo.gwt.shell.JavaCommand} object.
+     */
     protected void addPersistentUnitCache(JavaCommand cmd) {
         if ( persistentunitcache != null )
         {

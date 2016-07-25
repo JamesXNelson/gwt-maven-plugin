@@ -44,12 +44,16 @@ import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 
 /**
+ * <p>DefaultGwtModuleReader class.</p>
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 public class DefaultGwtModuleReader
     implements GwtModuleReader
 {
+    /** Constant <code>GWT_MODULE_EXTENSION=".gwt.xml"</code> */
     public static final String GWT_MODULE_EXTENSION = ".gwt.xml";
 
     private MavenProject mavenProject;
@@ -58,6 +62,13 @@ public class DefaultGwtModuleReader
 
     private Log log;
 
+    /**
+     * <p>Constructor for DefaultGwtModuleReader.</p>
+     *
+     * @param mavenProject a {@link org.apache.maven.project.MavenProject} object.
+     * @param log a {@link org.apache.maven.plugin.logging.Log} object.
+     * @param classpathBuilder a {@link org.codehaus.mojo.gwt.ClasspathBuilder} object.
+     */
     public DefaultGwtModuleReader( MavenProject mavenProject, Log log, ClasspathBuilder classpathBuilder )
     {
         this.mavenProject = mavenProject;
@@ -65,6 +76,11 @@ public class DefaultGwtModuleReader
         this.classpathBuilder = classpathBuilder;
     }
 
+    /**
+     * <p>getGwtModules.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @SuppressWarnings("unchecked")
     public List<String> getGwtModules()
     {
@@ -119,6 +135,7 @@ public class DefaultGwtModuleReader
         return modules;
     }
 
+    /** {@inheritDoc} */
     public GwtModule readModule( String name )
         throws GwtModuleReaderException
     {
@@ -203,6 +220,13 @@ public class DefaultGwtModuleReader
         }
     }
 
+    /**
+     * <p>getClasspath.</p>
+     *
+     * @param scope a {@link java.lang.String} object.
+     * @return a {@link java.util.Collection} object.
+     * @throws org.codehaus.mojo.gwt.ClasspathBuilderException if any.
+     */
     public Collection<File> getClasspath( String scope )
         throws ClasspathBuilderException
     {

@@ -30,8 +30,9 @@ import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Cleanup the webapp directory for GWT module compilation output
- * 
+ *
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
+ * @version $Id: $Id
  */
 @Mojo(name = "clean", threadSafe = true)
 public class GwtCleanMojo
@@ -40,8 +41,10 @@ public class GwtCleanMojo
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.apache.maven.plugin.Mojo#execute()
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
      */
     public void execute()
         throws MojoExecutionException, MojoFailureException

@@ -20,18 +20,32 @@ package org.codehaus.mojo.gwt.shell;
  */
 
 /**
+ * <p>JavaCommandException class.</p>
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 public class JavaCommandException
     extends Exception
 {
 
+    /**
+     * <p>Constructor for JavaCommandException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public JavaCommandException( String message )
     {
         super( message );
     }
 
+    /**
+     * <p>Constructor for JavaCommandException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param t a {@link java.lang.Throwable} object.
+     */
     public JavaCommandException( String message, Throwable t )
     {
         super( message, t );

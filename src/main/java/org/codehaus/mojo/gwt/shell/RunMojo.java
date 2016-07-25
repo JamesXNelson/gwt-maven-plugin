@@ -277,7 +277,10 @@ public class RunMojo
     private String methodNameDisplayMode;
 
     /**
+     * <p>getStartupUrl.</p>
+     *
      * @return the startup URL to open in hosted browser (gwt 1.6+)
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
      */
     public String getStartupUrl()
         throws MojoExecutionException
@@ -312,6 +315,12 @@ public class RunMojo
         return runTarget;
     }
 
+    /**
+     * <p>doExecute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
+     */
     public void doExecute( )
         throws MojoExecutionException, MojoFailureException
     {
@@ -423,6 +432,7 @@ public class RunMojo
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void postProcessClassPath( Collection<File> classPath )
     {
@@ -622,12 +632,19 @@ public class RunMojo
         }
     }
 
+    /**
+     * <p>Getter for the field <code>port</code>.</p>
+     *
+     * @return a int.
+     */
     public int getPort()
     {
         return this.port;
     }
 
     /**
+     * <p>Setter for the field <code>runTimeOut</code>.</p>
+     *
      * @param runTimeOut the runTimeOut to set
      */
     public void setRunTimeOut( int runTimeOut )
@@ -635,11 +652,17 @@ public class RunMojo
         setTimeOut( runTimeOut );
     }
 
+    /**
+     * <p>Setter for the field <code>executedProject</code>.</p>
+     *
+     * @param executedProject a {@link org.apache.maven.project.MavenProject} object.
+     */
     public void setExecutedProject( MavenProject executedProject )
     {
         this.executedProject = executedProject;
     }
 
+    /** {@inheritDoc} */
     @Override
     public MavenProject getProject()
     {

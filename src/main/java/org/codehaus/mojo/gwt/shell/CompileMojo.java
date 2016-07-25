@@ -51,6 +51,8 @@ import java.util.HashSet;
  * @author ccollins
  * @author <a href="mailto:nicolas@apache.org">Nicolas De loof</a>
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
+ * @author <a href="mailto:nicolas@apache.org">Nicolas De loof</a>
+ * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  */
 @Mojo(name = "compile", defaultPhase = LifecyclePhase.PREPARE_PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE, threadSafe = true)
 public class CompileMojo
@@ -360,6 +362,12 @@ public class CompileMojo
     @Parameter(defaultValue = "NONE", property = "gwt.compiler.methodNameDisplayMode")
     private String methodNameDisplayMode;
 
+    /**
+     * <p>doExecute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
+     */
     public void doExecute( )
         throws MojoExecutionException, MojoFailureException
     {
@@ -377,6 +385,7 @@ public class CompileMojo
         compile( getModules() );
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getExtraJvmArgs()
     {

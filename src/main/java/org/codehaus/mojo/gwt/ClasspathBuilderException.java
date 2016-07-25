@@ -20,17 +20,31 @@ package org.codehaus.mojo.gwt;
  */
 
 /**
+ * <p>ClasspathBuilderException class.</p>
+ *
  * @author <a href="mailto:olamy@apache.org">Olivier Lamy</a>
  * @since 2.1.0-1
+ * @version $Id: $Id
  */
 public class ClasspathBuilderException
     extends Exception
 {
+    /**
+     * <p>Constructor for ClasspathBuilderException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param t a {@link java.lang.Throwable} object.
+     */
     public ClasspathBuilderException( String message, Throwable t )
     {
         super( message, t );
     }
 
+    /**
+     * <p>Constructor for ClasspathBuilderException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public ClasspathBuilderException( String message )
     {
         super( message );

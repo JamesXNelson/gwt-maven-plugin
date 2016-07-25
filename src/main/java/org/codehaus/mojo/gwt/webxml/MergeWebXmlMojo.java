@@ -44,7 +44,7 @@ import java.util.Set;
  * <p>
  * <b>If you use {@link #scanRemoteServiceRelativePathAnnotation} you must bind this mojo to at least compile phase</b>
  * Because the classpath scanner need to see compile classes
- * 
+ *
  * @author cooper
  * @version $Id$
  */
@@ -78,12 +78,19 @@ public class MergeWebXmlMojo
     @Component
     private ServletAnnotationFinder servletAnnotationFinder;
 
+    /** {@inheritDoc} */
     @Override
     protected boolean isGenerator() {
         return true;
     }
 
     
+    /**
+     * <p>doExecute.</p>
+     *
+     * @throws org.apache.maven.plugin.MojoExecutionException if any.
+     * @throws org.apache.maven.plugin.MojoFailureException if any.
+     */
     public void doExecute()
         throws MojoExecutionException, MojoFailureException
     {

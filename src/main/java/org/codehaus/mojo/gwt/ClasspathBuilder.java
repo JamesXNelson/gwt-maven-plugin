@@ -41,7 +41,7 @@ import org.codehaus.plexus.logging.AbstractLogEnabled;
 
 /**
  * Util to consolidate classpath manipulation stuff in one place.
- * 
+ *
  * @author ccollins
  * @version $Id$
  */
@@ -62,7 +62,8 @@ public class ClasspathBuilder
      * @param scope artifact scope to use
      * @param isGenerator whether to use processed resources and compiled classes (false), or raw resources (true).
      * @return file collection for classpath
-     * @throws MojoExecutionException 
+     * @throws MojoExecutionException if any.
+     * @throws org.codehaus.mojo.gwt.ClasspathBuilderException if any.
      */
     public Collection<File> buildClasspathList( final MavenProject project, final String scope,
                                                 Set<Artifact> artifacts, boolean isGenerator )
@@ -137,9 +138,9 @@ public class ClasspathBuilder
     /**
      * Add all sources and resources also with active (maven reactor active) referenced project sources and resources.
      *
-     * @param project
-     * @param items
-     * @param scope
+     * @param project a {@link org.apache.maven.project.MavenProject} object.
+     * @param items a {@link java.util.Collection} object.
+     * @param scope a {@link java.lang.String} object.
      */
     public void addSourcesWithActiveProjects( final MavenProject project, final Collection<File> items,
                                               final String scope )
@@ -163,9 +164,9 @@ public class ClasspathBuilder
     /**
      * Add all sources and resources also with active (maven reactor active) referenced project sources and resources.
      *
-     * @param project
-     * @param items
-     * @param scope
+     * @param project a {@link org.apache.maven.project.MavenProject} object.
+     * @param items a {@link java.util.Collection} object.
+     * @param scope a {@link java.lang.String} object.
      */
     public void addResourcesWithActiveProjects( final MavenProject project, final Collection<File> items,
                                                 final String scope )

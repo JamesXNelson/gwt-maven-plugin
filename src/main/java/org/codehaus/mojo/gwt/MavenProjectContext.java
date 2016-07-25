@@ -26,6 +26,8 @@ import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.project.MavenProject;
 
 /**
+ * <p>MavenProjectContext class.</p>
+ *
  * @author ndeloof
  * @version $Id$
  */
@@ -39,8 +41,11 @@ public class MavenProjectContext
     private List<ArtifactRepository> remoteRepositories;
 
     /**
-     * @param project
-     * @param localRepository
+     * <p>Constructor for MavenProjectContext.</p>
+     *
+     * @param project a {@link org.apache.maven.project.MavenProject} object.
+     * @param localRepository a {@link org.apache.maven.artifact.repository.ArtifactRepository} object.
+     * @param remoteRepositories a {@link java.util.List} object.
      */
     public MavenProjectContext( MavenProject project, ArtifactRepository localRepository,
                                 List<ArtifactRepository> remoteRepositories )
@@ -51,21 +56,41 @@ public class MavenProjectContext
         this.remoteRepositories = remoteRepositories;
     }
 
+    /**
+     * <p>Getter for the field <code>project</code>.</p>
+     *
+     * @return a {@link org.apache.maven.project.MavenProject} object.
+     */
     public MavenProject getProject()
     {
         return project;
     }
 
+    /**
+     * <p>Getter for the field <code>localRepository</code>.</p>
+     *
+     * @return a {@link org.apache.maven.artifact.repository.ArtifactRepository} object.
+     */
     public ArtifactRepository getLocalRepository()
     {
         return localRepository;
     }
 
+    /**
+     * <p>getBuildDir.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     public File getBuildDir()
     {
         return new File( project.getBuild().getDirectory() );
     }
 
+    /**
+     * <p>Getter for the field <code>remoteRepositories</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<ArtifactRepository> getRemoteRepositories()
     {
         return remoteRepositories;
